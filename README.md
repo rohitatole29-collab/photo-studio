@@ -325,14 +325,14 @@ pipeline {
 ```
 
 ---
-
+```bash
 Step 10: Install Nginx
 sudo apt install nginx -y
-
+```
 Create Config:
-
+```bash
 sudo nano /etc/nginx/sites-available/photostudio
-
+```
 Paste:
 
 server {
@@ -348,43 +348,139 @@ server {
 }
 
 Enable:
-
+```bash
 sudo ln -s /etc/nginx/sites-available/photostudio /etc/nginx/sites-enabled/
-
+```
+```bash
 sudo nginx -t
+```
 
+```bash
 sudo systemctl restart nginx
-
+```
 Verify:
 
 http://EC2_PUBLIC_IP
 ---
 
-## 📊 Monitoring
+## 📊 Monitoring with Prometheus
 
-### Prometheus
+### Run Prometheus
 
-Metrics Endpoint:
-
-```text
-http://SERVER_IP:9090
+```bash
+docker run -d \
+  --name prometheus \
+  -p 9090:9090 \
+  -v $(pwd)/prometheus.yml:/etc/prometheus/prometheus.yml \
+  prom/prometheus
 ```
 
-### Grafana
+### Verify Container
 
-Dashboard:
-
-```text
-http://SERVER_IP:3000
+```bash
+docker ps
 ```
 
-Default Login:
+### Access Prometheus
+
+```text
+http://<EC2-PUBLIC-IP>:9090
+```
+
+### Prometheus Targets
+
+```text
+Status → Targets
+```
+
+---
+
+## 📈 Monitoring Dashboard with Grafana
+
+### Run Grafana
+
+```bash
+docker run -d \
+  --name grafana \
+  -p 3000:3000 \
+  grafana/grafana
+```
+
+### Verify Container
+
+```bash
+docker ps
+```
+
+### Access Grafana
+
+```text
+http://<EC2-PUBLIC-IP>:3000
+```
+
+### Default Credentials
 
 ```text
 Username: admin
 Password: admin
 ```
 
+### Configure Prometheus Data Source
+
+1. Login to Grafana
+2. Navigate to **Connections → Data Sources**
+3. Click **Add Data Source**
+4. Select **Prometheus**
+5. URL:
+
+```text
+http://prometheus:9090
+```
+
+6. Click **Save & Test**
+
+### Create Dashboard
+
+1. Dashboards → New Dashboard
+2. Add Visualization
+3. Select Prometheus Data Source
+4. Use Metrics:
+
+```text
+up
+```
+
+```text
+jvm_memory_used_bytes
+```
+
+```text
+system_cpu_usage
+```
+
+```text
+http_server_requests_seconds_count
+```
+
+---
+
+## 📊 Monitoring Stack
+
+```text
+Spring Boot Application
+          │
+          ▼
+ Actuator Metrics
+          │
+          ▼
+    Prometheus
+          │
+          ▼
+      Grafana
+          │
+          ▼
+   Dashboards & Alerts
+```
 ---
 
 ## 📸 Screenshots
