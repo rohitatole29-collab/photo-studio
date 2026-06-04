@@ -129,6 +129,23 @@ Spring Boot Application
 ```
 
 ---
+Install Docker
+sudo apt update
+
+sudo apt install docker.io -y
+
+sudo systemctl enable docker
+
+sudo systemctl start docker
+
+sudo usermod -aG docker $USER
+newgrp docker
+
+Reconnect SSH.
+
+Verify:
+
+docker --version
 
 ## 🐳 Docker Deployment
 
@@ -257,9 +274,15 @@ pipeline {
 
 ---
 
-## 🌐 Nginx Configuration
+Step 10: Install Nginx
+sudo apt install nginx -y
 
-```nginx
+Create Config:
+
+sudo nano /etc/nginx/sites-available/photostudio
+
+Paste:
+
 server {
     listen 80;
 
@@ -271,8 +294,18 @@ server {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 }
-```
 
+Enable:
+
+sudo ln -s /etc/nginx/sites-available/photostudio /etc/nginx/sites-enabled/
+
+sudo nginx -t
+
+sudo systemctl restart nginx
+
+Verify:
+
+http://EC2_PUBLIC_IP
 ---
 
 ## 📊 Monitoring
