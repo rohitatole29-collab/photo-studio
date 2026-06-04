@@ -1,0 +1,25 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photos — Admin</title><link th:href="@{/css/style.css}" rel="stylesheet"></head>
+<body>
+<section class="page-section">
+  <h1>Photos</h1>
+  <p><a class="btn" th:href="@{/admin/photos/new}">+ Add Photo</a></p>
+  <table class="cart-table">
+    <tr><th>ID</th><th>Name</th><th>Price</th><th>Preview</th><th>Published</th><th>Toggle</th></tr>
+    <tr th:each="p : ${photos}">
+      <td th:text="${p.id}"></td>
+      <td th:text="${p.name}"></td>
+      <td th:text="${p.price}"></td>
+      <td><img th:src="${p.previewUrl}" class="thumb-sm"></td>
+      <td th:text="${p.published}"></td>
+      <td>
+        <form th:action="@{'/admin/photos/' + ${p.id} + '/publish'}" method="post">
+          <input type="hidden" name="published" th:value="${!p.published}"/>
+          <button class="btn" th:text="${p.published} ? 'Unpublish' : 'Publish'"></button>
+        </form>
+      </td>
+    </tr>
+  </table>
+</section>
+</body></html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — PhotoStudio</title>
+  <link th:href="@{/css/style.css}" rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #fff;
+    }
+
+    section.page-section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: #fff;
+      margin-bottom: 25px;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #111;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(140, 82, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      background: #222;
+      color: #fff;
+      outline: none;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      background: #1a1a1a;
+      box-shadow: 0 0 5px #8c52ff;
+    }
+
+    .contact-form button {
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: #fff;
+      background: #8c52ff;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .contact-form button:hover {
+      background: #732efc;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 26px;
+      }
+      .contact-form {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ✅ Header -->
+  <div th:replace="fragments/header :: site-header"></div>
+
+  <!-- ✅ Contact Section -->
+  <section class="page-section">
+    <h1>Contact Us</h1>
+
+    <form class="contact-form" method="post" th:action="@{/contact}">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <textarea name="message" rows="5" placeholder="Your message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <!-- ✅ Footer -->
+  <div th:replace="fragments/footer :: site-footer"></div>
+</body>
+</html>

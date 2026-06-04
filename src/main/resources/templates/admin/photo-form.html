@@ -1,0 +1,15 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Add Photo — Admin</title><link th:href="@{/css/style.css}" rel="stylesheet"></head>
+<body>
+<section class="page-section">
+  <h1>Add New Photo</h1>
+  <form th:action="@{/admin/photos}" method="post" enctype="multipart/form-data" class="contact-form">
+    <input type="text" name="name" placeholder="Name" required>
+    <input type="number" name="price" step="0.01" placeholder="Price" required>
+    <label>Preview Image (public): <input type="file" name="preview" accept="image/*" required></label>
+    <label>Full Image (private): <input type="file" name="full" accept="image/*" required></label>
+    <button type="submit">Save</button>
+  </form>
+</section>
+</body></html>

@@ -1,0 +1,58 @@
+version: "3.8"
+
+services:
+  java-app:
+    build: .
+    container_name: photostudioapp
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql-db:3306/photodb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    depends_on:
+      mysql-db:
+        condition: service_healthy
+    restart: always
+    networks:
+      - photostudio-app-nw
+
+  mysql-db:
+    image: mysql:8
+    container_name: mysql-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: photodb
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    networks:
+      - photostudio-app-nw
+
+  redis:
+    image: redis:7.0.5-alpine
+    container_name: redis-service
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks:
+      - photostudio-app-nw
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - java-app
+    networks:
+      - photostudio-app-nw
+
+volumes:
+  mysql-data:
+
+networks:
+  photostudio-app-nw:

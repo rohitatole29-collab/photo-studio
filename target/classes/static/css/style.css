@@ -1,0 +1,25 @@
+body{margin:0;font-family:Poppins,Arial,Helvetica,sans-serif;background:#000;color:#fff}
+.navbar{display:flex;justify-content:space-between;align-items:center;background:#111;padding:15px 40px;position:sticky;top:0}
+.navbar a{color:#fff;text-decoration:none;margin:0 12px}.navbar a:hover{color:#8c52ff}
+.logo{font-weight:700}
+.hero{text-align:center;padding:60px 20px 20px}
+.gallery-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:25px;padding:40px 50px}
+.card{background:#111;border-radius:12px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-8px);box-shadow:0 10px 25px rgba(140,82,255,.3)}
+.card img{width:100%;height:220px;object-fit:cover}
+.card-content{padding:15px;text-align:center}
+.card-content h3{margin-bottom:6px}
+.card-content button,.btn{background:#8c52ff;border:none;color:#fff;padding:10px 18px;border-radius:8px;cursor:pointer}
+.card-content button:hover,.btn:hover{background:#a975ff}
+.page-section{text-align:center;padding:60px 20px;max-width:1000px;margin:auto}
+.footer{background:#111;text-align:center;padding:20px;color:#aaa;margin-top:40px}
+.cart-table{width:90%;margin:20px auto;border-collapse:collapse}
+.cart-table th,.cart-table td{border-bottom:1px solid #333;padding:10px;text-align:left}
+.thumb-sm{width:70px;height:50px;object-fit:cover;border-radius:6px}
+.service-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.service-card{background:#111;border-radius:10px;padding:20px}
+.download-btn{display:inline-block;background:#8c52ff;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none}
+input,textarea{background:#111;border:1px solid #333;color:#fff;padding:10px;border-radius:6px;width:100%;max-width:420px;margin:6px auto;display:block}
+button{background:#8c52ff;border:none;color:#fff;padding:10px 18px;border-radius:8px;cursor:pointer}
+button.danger{background:#c0392b}
+.total{margin:20px auto;text-align:right;width:90%}

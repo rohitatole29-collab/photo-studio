@@ -1,0 +1,13 @@
+<!DOCTYPE html><html xmlns:th="http://www.thymeleaf.org"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login — PhotoStudio</title><link th:href="@{/css/style.css}" rel="stylesheet"></head>
+<body>
+<section class="page-section">
+  <h1>Admin Login</h1>
+  <form method="post" th:action="@{/admin/login}">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+</section>
+</body></html>
