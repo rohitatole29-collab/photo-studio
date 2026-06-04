@@ -129,7 +129,8 @@ Spring Boot Application
 ```
 
 ---
-Install Docker
+## 🐳 Install Docker
+
 sudo apt update
 
 sudo apt install docker.io -y
@@ -219,6 +220,40 @@ docker compose up -d --build
 ```
 
 ---
+
+ ## 🔄 Jenkins Install Jenkins
+ 
+sudo apt update
+
+sudo apt install openjdk-17-jdk -y
+
+Add Jenkins Repository:
+
+curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
+/usr/share/keyrings/jenkins-keyring.asc > /dev/null
+echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+/etc/apt/sources.list.d/jenkins.list > /dev/null
+
+Install:
+
+sudo apt update
+
+sudo apt install jenkins -y
+
+Start:
+
+sudo systemctl enable jenkins
+
+sudo systemctl start jenkins
+
+Get Password:
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+Open:
+
+http://EC2_PUBLIC_IP:8080
 
 ## 🔄 Jenkins CI/CD Pipeline
 
