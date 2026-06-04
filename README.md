@@ -131,16 +131,27 @@ Spring Boot Application
 ---
 ## 🐳 Install Docker
 
+
+```bash
 sudo apt update
+```
 
+```bash
 sudo apt install docker.io -y
+```
 
+```bash
 sudo systemctl enable docker
-
+```
+```bash
 sudo systemctl start docker
-
+```
+```bash
 sudo usermod -aG docker $USER
+```
+```bash
 newgrp docker
+```
 
 Reconnect SSH.
 
@@ -198,6 +209,8 @@ Open Ports:
 * 80 (HTTP)
 * 3000 (Grafana)
 * 9090 (Prometheus)
+* 8080 (jenkins)
+* 8081 (springBoot)
 
 ### Connect
 
@@ -222,35 +235,39 @@ docker compose up -d --build
 ---
 
  ## 🔄 Jenkins Install Jenkins
- 
+ ```bash
 sudo apt update
-
+```
+```bash
 sudo apt install openjdk-17-jdk -y
+```
 
 Add Jenkins Repository:
-
+```bash
 curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key | sudo tee \
 /usr/share/keyrings/jenkins-keyring.asc > /dev/null
 echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
 https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
 /etc/apt/sources.list.d/jenkins.list > /dev/null
-
+```
 Install:
-
+```bash
 sudo apt update
-
+```
+```bash
 sudo apt install jenkins -y
-
+```
 Start:
-
+```bash
 sudo systemctl enable jenkins
-
+```
+```bash
 sudo systemctl start jenkins
-
+```
 Get Password:
-
+```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-
+```
 Open:
 
 http://EC2_PUBLIC_IP:8080
